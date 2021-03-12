@@ -83,8 +83,6 @@ def about():
         Mb.showinfo("about", "Temperature converter \n Copyright David Yusuf 2021")
     }
 
-#update waktu
-
 worklist = ["Celcius","Fahrenheit","Kelvin"]
 choice_var = tk.StringVar()
 #choice_var.set(worklist[0])
