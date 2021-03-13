@@ -1,12 +1,13 @@
 import time
+import math
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox as Mb
 
 # global var
 
-opsi = 0
-opsi2 = 0
+opsi = 1
+opsi2 = 1
 inputs = 0
 
 # configure
@@ -50,33 +51,24 @@ def myCmd():
 def process():
     global inputs
     hasil = tk.IntVar()
-
-    # celcius
-
-    if opsi == opsi2:
-        hasil.set(inputs)
-    elif opsi == 0 and opsi2 == 1:
-        hasil.set(round(inputs * 9 / 5 + 32,2))
-    elif opsi == 0 and opsi2 == 2:
-        hasil.set(round(inputs + 273.15,2))
-    elif opsi == 1 and opsi2 == 0:
-
-    # fahrenheit
-
-        hasil.set(round((inputs - 32) * 5 / 9, 2))
-    elif opsi == 1 and opsi2 == 2:
-        hasil.set(round(273.15 + (inputs - 32) * 5 / 9, 2))
-    elif opsi == 2 and opsi2 == 0:
-
-    # kelvin
-
-        hasil.set(round(inputs - 273.15, 2))
-    elif opsi == 2 and opsi2 == 1:
-        hasil.set(round((inputs - 273.15) * 9 / 5 + 32, 2))
+    #optimisasi if else dengan metode branchless programming
+    hasil.set(round((inputs)*(int(not(1/opsi - math.floor(opsi/1))))
+                    + ((273.15) * (int(not(3/opsi2 - math.floor(opsi2/3))))) *(int(not(1/opsi - math.floor(opsi/1))))
+                    + ((inputs * 9/5 + 32 ) * (int(not (2 / opsi2 - math.floor(opsi2 / 2))))) *(int(not(1/opsi - math.floor(opsi/1))))
+                    - (inputs)*(int(not(2/opsi2 - math.floor(opsi2/2)))) *(int(not(1/opsi - math.floor(opsi/1))))
+                    +(((inputs)*(int(not(2/opsi - math.floor(opsi/2))))
+                       + ( inputs - 32 ) * (5/9)*(int(not(1/opsi2 - math.floor(opsi2/1))))) * (int(not(2/opsi - math.floor(opsi/2)))))
+                    - (inputs)*(int(not(1/opsi2 - math.floor(opsi2/1)))) * (int(not(2/opsi - math.floor(opsi/2))))
+                    + ((273.15)*(int(not(3/opsi2 - math.floor(opsi2/3))))) * (int(not(2/opsi - math.floor(opsi/2))))
+                    + ((inputs - 32) * (5/9)*(int(not(3/opsi2 - math.floor(opsi2/3))))) * (int(not(2/opsi - math.floor(opsi/2))))
+                    - (inputs)*(int(not(3/opsi2 - math.floor(opsi2/3)))) * (int(not(2/opsi - math.floor(opsi/2))))
+                    + (inputs)*(int(not(3/opsi - math.floor(opsi/3))))
+                    - ((273.15)*(int(not(1/opsi2 - math.floor(opsi2/1))))) *(int(not(3/opsi - math.floor(opsi/3))))
+                    + ((((inputs - 273.15)*9/5 +32)) * (int(not(2/opsi2 - math.floor(opsi2/2)))) *(int(not(3/opsi - math.floor(opsi/3))))
+                       - (inputs)* (int(not(2/opsi2 - math.floor(opsi2/2)))))*(int(not(3/opsi - math.floor(opsi/3)))),2))
     print ('[', time.strftime('%H:%M:%S', time.localtime()), ']',
            'Hasil konversi: ' + str(hasil.get()))
     label_hasil.config(textvariable=hasil)
-
 
 def choices(event):
 
@@ -90,11 +82,11 @@ def choices(event):
 
     for i in range(len(worklist)):
         if choice_var.get() == worklist[i]:
-            opsi = i
+            opsi = i+1
 
     for i in range(len(worklist)):
         if choice_var2.get() == worklist[i]:
-            opsi2 = i
+            opsi2 = i+1
 
     print ('[', time.strftime('%H:%M:%S', time.localtime()), ']',
            'Indeks opsi pertama yang terpilih: ' + str(opsi))
@@ -112,11 +104,7 @@ def about():
 worklist = ['Celcius', 'Fahrenheit', 'Kelvin']
 choice_var = tk.StringVar()
 
-# choice_var.set(worklist[0])
-
 choice_var2 = tk.StringVar()
-
-# choice_var2.set(worklist[0])
 
 # menu opsi
 
