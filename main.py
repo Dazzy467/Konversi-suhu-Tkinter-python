@@ -51,24 +51,39 @@ def myCmd():
 def process():
     global inputs
     hasil = tk.IntVar()
-    #optimisasi if else dengan metode branchless programming
-    hasil.set(round((inputs)*(int(not(1/opsi - math.floor(opsi/1))))
-                    + ((273.15) * (int(not(3/opsi2 - math.floor(opsi2/3))))) *(int(not(1/opsi - math.floor(opsi/1))))
-                    + ((inputs * 9/5 + 32 ) * (int(not (2 / opsi2 - math.floor(opsi2 / 2))))) *(int(not(1/opsi - math.floor(opsi/1))))
-                    - (inputs)*(int(not(2/opsi2 - math.floor(opsi2/2)))) *(int(not(1/opsi - math.floor(opsi/1))))
-                    +(((inputs)*(int(not(2/opsi - math.floor(opsi/2))))
-                       + ( inputs - 32 ) * (5/9)*(int(not(1/opsi2 - math.floor(opsi2/1))))) * (int(not(2/opsi - math.floor(opsi/2)))))
-                    - (inputs)*(int(not(1/opsi2 - math.floor(opsi2/1)))) * (int(not(2/opsi - math.floor(opsi/2))))
-                    + ((273.15)*(int(not(3/opsi2 - math.floor(opsi2/3))))) * (int(not(2/opsi - math.floor(opsi/2))))
-                    + ((inputs - 32) * (5/9)*(int(not(3/opsi2 - math.floor(opsi2/3))))) * (int(not(2/opsi - math.floor(opsi/2))))
-                    - (inputs)*(int(not(3/opsi2 - math.floor(opsi2/3)))) * (int(not(2/opsi - math.floor(opsi/2))))
-                    + (inputs)*(int(not(3/opsi - math.floor(opsi/3))))
-                    - ((273.15)*(int(not(1/opsi2 - math.floor(opsi2/1))))) *(int(not(3/opsi - math.floor(opsi/3))))
-                    + ((((inputs - 273.15)*9/5 +32)) * (int(not(2/opsi2 - math.floor(opsi2/2)))) *(int(not(3/opsi - math.floor(opsi/3))))
-                       - (inputs)* (int(not(2/opsi2 - math.floor(opsi2/2)))))*(int(not(3/opsi - math.floor(opsi/3)))),2))
+
+    # optimisasi if else dengan metode branchless programming
+
+    hasil.set(round(inputs * int(not 1 / opsi - math.floor(opsi / 1))
+              + 273.15 * int(not 3 / opsi2 - math.floor(opsi2 / 3))
+              * int(not 1 / opsi - math.floor(opsi / 1)) + (inputs * 9
+              / 5 + 32) * int(not 2 / opsi2 - math.floor(opsi2 / 2))
+              * int(not 1 / opsi - math.floor(opsi / 1)) - inputs
+              * int(not 2 / opsi2 - math.floor(opsi2 / 2)) * int(not 1
+              / opsi - math.floor(opsi / 1)) + (inputs * int(not 2
+              / opsi - math.floor(opsi / 2)) + (inputs - 32) * (5 / 9)
+              * int(not 1 / opsi2 - math.floor(opsi2 / 1))) * int(not 2
+              / opsi - math.floor(opsi / 2)) - inputs * int(not 1
+              / opsi2 - math.floor(opsi2 / 1)) * int(not 2 / opsi
+              - math.floor(opsi / 2)) + 273.15 * int(not 3 / opsi2
+              - math.floor(opsi2 / 3)) * int(not 2 / opsi
+              - math.floor(opsi / 2)) + (inputs - 32) * (5 / 9)
+              * int(not 3 / opsi2 - math.floor(opsi2 / 3)) * int(not 2
+              / opsi - math.floor(opsi / 2)) - inputs * int(not 3
+              / opsi2 - math.floor(opsi2 / 3)) * int(not 2 / opsi
+              - math.floor(opsi / 2)) + inputs * int(not 3 / opsi
+              - math.floor(opsi / 3)) - 273.15 * int(not 1 / opsi2
+              - math.floor(opsi2 / 1)) * int(not 3 / opsi
+              - math.floor(opsi / 3)) + (((inputs - 273.15) * 9 / 5
+              + 32) * int(not 2 / opsi2 - math.floor(opsi2 / 2))
+              * int(not 3 / opsi - math.floor(opsi / 3)) - inputs
+              * int(not 2 / opsi2 - math.floor(opsi2 / 2))) * int(not 3
+              / opsi - math.floor(opsi / 3)), 2))
+
     print ('[', time.strftime('%H:%M:%S', time.localtime()), ']',
            'Hasil konversi: ' + str(hasil.get()))
     label_hasil.config(textvariable=hasil)
+
 
 def choices(event):
 
@@ -82,11 +97,11 @@ def choices(event):
 
     for i in range(len(worklist)):
         if choice_var.get() == worklist[i]:
-            opsi = i+1
+            opsi = i + 1
 
     for i in range(len(worklist)):
         if choice_var2.get() == worklist[i]:
-            opsi2 = i+1
+            opsi2 = i + 1
 
     print ('[', time.strftime('%H:%M:%S', time.localtime()), ']',
            'Indeks opsi pertama yang terpilih: ' + str(opsi))
